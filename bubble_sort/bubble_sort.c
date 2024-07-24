@@ -9,7 +9,7 @@ static void	swap(int *a, int *b)
 	*b = temp;
 }
 
-void	bubble_sort(int *arr, int n)
+void	ft_bubble_sort(int *arr, int n)
 {
 	int	i;
 	int	j;
@@ -35,7 +35,7 @@ void	bubble_sort(int *arr, int n)
 // {
 // 	int a[5] = {2,3,5,1,0};
 
-// 	bubble_sort(a, 5);
+// 	ft_bubble_sort(a, 5);
 // 	for (size_t i = 0; i < sizeof(a) / sizeof(a[0]); i++)
 // 	{
 // 		printf("%d ", a[i]);
