@@ -31,58 +31,59 @@ static int	ft_max(int *arr, size_t n)
 	return (max);
 }
 
-static void	*ft_replace_order(int *arr, size_t num, int j)
+static void	ft_replace_order(int *arr, size_t num, int j)
 {
-	int	i;
+	static int	p;
+	int			i;
 
 	i = 0;
 	if (!j)
-		return (arr);
+		return ;
 	while (i < j)
 	{
-		*arr = num;
-		arr++;
+		*(arr + p) = num;
 		i++;
+		p++;
 	}
-	return (arr);
 }
 
 void	ft_countingsort(int arr[], size_t n)
 {
 	size_t		i;
 	size_t		len;
-	int			*pos;
 	int			*count;
 
 	len = ft_max(arr, n);
 	i = 0;
-	pos = arr;
+	if (len > 67108851)
+	{
+		write(STDERR_FILENO, "Range might overlap memories.\n", 30);
+		return ;
+	}
 	count = allocate_zero_arr(len);
 	while (i < n)
-	{
 		count[arr[i++]] += 1;
-	}
 	i = 0;
 	while (i <= len)
 	{
-		pos = (int *)ft_replace_order(pos, i, count[i]);
+		ft_replace_order(arr, i, count[i]);
 		i++;
 	}
 	free(count);
 }
 
 // for testing the function
-// #include <stdio.h>
+#include <stdio.h>
 
-// int	main(void)
-// {
-// 	int a[10] = {0,1,9,2,0,5,4,56,4,3};
+int	main(void)
+{
+	int a[10] = {0,1,9,2,0,4,56,4,3,67108852};
 
-// 	ft_countingsort(a, sizeof(a) / sizeof(a[0]));
-// 	for (size_t i = 0; i < sizeof(a) / sizeof(a[0]); i++)
-// 	{
-// 		printf("%d ", a[i]);
-// 	}
-// 	return (0);
-// }
+	ft_countingsort(a, sizeof(a) / sizeof(a[0]));
+	for (size_t i = 0; i < sizeof(a) / sizeof(a[0]); i++)
+	{
+		printf("%d ", a[i]);
+	}
+	return (0);
+}
 
